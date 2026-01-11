@@ -3,11 +3,16 @@ import type { Server } from "http";
 import { storage } from "./storage";
 import { api } from "@shared/routes";
 import { z } from "zod";
+import express from "express";
+import path from "path";
 
 export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
+  // Serve attached assets
+  app.use("/attached_assets", express.static(path.resolve(import.meta.dirname, "..", "attached_assets")));
+
   // Products
   app.get(api.products.list.path, async (req, res) => {
     const products = await storage.getProducts();

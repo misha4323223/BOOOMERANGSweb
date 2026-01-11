@@ -14,6 +14,9 @@ export function ProductCard({ product }: ProductCardProps) {
     minimumFractionDigits: 0,
   }).format(product.price);
 
+  // Map database path to static path if needed
+  const imageUrl = product.imageUrl;
+
   return (
     <Link href={`/products/${product.id}`} className="group cursor-pointer block">
       <motion.div 
@@ -24,7 +27,7 @@ export function ProductCard({ product }: ProductCardProps) {
       >
         {/* Dynamic Image from DB or Unsplash fallback */}
         <img 
-          src={product.imageUrl} 
+          src={imageUrl} 
           alt={product.name}
           className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-105"
         />
