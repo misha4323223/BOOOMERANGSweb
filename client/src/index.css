@@ -91,13 +91,13 @@
 @layer utilities {
   .animate-marquee {
     display: inline-block;
-    animation: marquee 30s linear infinite;
+    animation: marquee 15s linear infinite;
     will-change: transform;
   }
 
   @keyframes marquee {
     from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    to { transform: translateX(-100%); }
   }
 }
 

@@ -135,18 +135,14 @@ export default function Home() {
       <div className="bg-primary py-2 sm:py-4 overflow-hidden border-y border-black/10">
         <div className="whitespace-nowrap flex">
           <div className="animate-marquee flex shrink-0">
-            {[...Array(5)].map((_, i) => (
-              <span key={`m1-${i}`} className="text-black font-display text-sm sm:text-2xl font-bold px-4 sm:px-8 uppercase tracking-widest flex items-center">
-                Новая коллекция уже в продаже • Бесплатная доставка при заказе от 5000₽ • 
-              </span>
-            ))}
+            <span className="text-black font-display text-sm sm:text-2xl font-bold px-4 sm:px-8 uppercase tracking-widest flex items-center">
+              Новая коллекция уже в продаже • Бесплатная доставка при заказе от 5000₽ • 
+            </span>
           </div>
           <div className="animate-marquee flex shrink-0">
-            {[...Array(5)].map((_, i) => (
-              <span key={`m2-${i}`} className="text-black font-display text-sm sm:text-2xl font-bold px-4 sm:px-8 uppercase tracking-widest flex items-center">
-                Новая коллекция уже в продаже • Бесплатная доставка при заказе от 5000₽ • 
-              </span>
-            ))}
+            <span className="text-black font-display text-sm sm:text-2xl font-bold px-4 sm:px-8 uppercase tracking-widest flex items-center">
+              Новая коллекция уже в продаже • Бесплатная доставка при заказе от 5000₽ • 
+            </span>
           </div>
         </div>
       </div>
