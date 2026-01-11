@@ -101,12 +101,12 @@ export default function ProductDetail() {
               {/* Color */}
               <div>
                 <label className="block font-mono text-xs uppercase text-zinc-500 mb-3">Выберите цвет</label>
-                <div className="flex gap-3">
+                <div className="flex flex-wrap gap-3">
                   {product.colors.map(color => (
                     <button
                       key={color}
                       onClick={() => setSelectedColor(color)}
-                      className={`h-10 px-4 font-mono text-sm uppercase border transition-all ${
+                      className={`h-12 px-6 font-mono text-sm uppercase border transition-all ${
                         selectedColor === color 
                           ? "border-primary bg-primary/10 text-primary" 
                           : "border-zinc-800 text-zinc-400 hover:border-zinc-600"
@@ -121,12 +121,12 @@ export default function ProductDetail() {
               {/* Size */}
               <div>
                 <label className="block font-mono text-xs uppercase text-zinc-500 mb-3">Выберите размер</label>
-                <div className="flex gap-3">
+                <div className="flex flex-wrap gap-3">
                   {product.sizes.map(size => (
                     <button
                       key={size}
                       onClick={() => setSelectedSize(size)}
-                      className={`w-12 h-12 flex items-center justify-center font-mono text-sm uppercase border transition-all ${
+                      className={`w-14 h-14 flex items-center justify-center font-mono text-sm uppercase border transition-all ${
                         selectedSize === size 
                           ? "border-primary bg-primary/10 text-primary" 
                           : "border-zinc-800 text-zinc-400 hover:border-zinc-600"

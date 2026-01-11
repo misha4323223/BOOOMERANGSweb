@@ -42,12 +42,12 @@ export default function ProductList() {
         </h1>
 
         {/* Filters */}
-        <div className="flex flex-wrap gap-4 mb-16 border-b border-zinc-800 pb-8">
+        <div className="flex flex-nowrap overflow-x-auto pb-4 mb-12 gap-3 no-scrollbar border-b border-zinc-800 lg:flex-wrap lg:overflow-visible lg:pb-8">
           {categories.map(cat => (
             <button
               key={cat}
               onClick={() => setFilter(cat)}
-              className={`font-mono text-sm uppercase tracking-wider px-4 py-2 border transition-all ${
+              className={`font-mono text-xs sm:text-sm uppercase tracking-wider px-6 py-3 border whitespace-nowrap transition-all ${
                 filter === cat 
                   ? "bg-primary border-primary text-white" 
                   : "bg-transparent border-zinc-800 text-zinc-400 hover:border-zinc-600 hover:text-white"
