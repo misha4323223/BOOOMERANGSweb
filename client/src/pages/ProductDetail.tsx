@@ -80,6 +80,17 @@ export default function ProductDetail() {
               <p className="line-clamp-3 sm:line-clamp-none">{product.description}</p>
             </div>
 
+            {/* Mobile-only image between description and selectors */}
+            <div className="lg:hidden mb-8">
+              <div className="aspect-[4/5] bg-zinc-900 w-full overflow-hidden rounded-none shadow-2xl">
+                <img 
+                  src={product.imageUrl} 
+                  alt={product.name} 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
             {/* Selectors */}
             <div className="space-y-6 mb-8">
               {/* Color */}
@@ -170,13 +181,13 @@ export default function ProductDetail() {
             )}
           </motion.div>
           
-          {/* Image Gallery - Bottom on mobile, left on desktop */}
+          {/* Image Gallery - Hidden on mobile, left on desktop */}
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="space-y-4 order-2 lg:order-1"
+            className="hidden lg:block space-y-4 lg:order-1"
           >
-            <div className="aspect-[4/5] sm:aspect-[3/4] bg-zinc-900 w-full overflow-hidden max-h-[50vh] sm:max-h-none">
+            <div className="aspect-[3/4] bg-zinc-900 w-full overflow-hidden">
               <img 
                 src={product.imageUrl} 
                 alt={product.name} 
