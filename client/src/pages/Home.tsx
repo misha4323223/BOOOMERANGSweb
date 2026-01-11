@@ -5,7 +5,7 @@ import { useProducts } from "@/hooks/use-products";
 import { ProductCard } from "@/components/ProductCard";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import boomerangsLogo from "@assets/generated_images/wavy_boomerangs_logo_on_black.png";
+import booomerangsLogo from "@assets/generated_images/booomerangs_wavy_logo_black_bg.png";
 
 export default function Home() {
   const { data: products, isLoading } = useProducts();
@@ -37,11 +37,13 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex flex-col items-center"
           >
-            <img 
-              src={boomerangsLogo} 
-              alt="Boomerangs Logo" 
-              className="w-full max-w-[600px] mb-8 invert brightness-200"
-            />
+            <div className="w-full max-w-[400px] mb-8 bg-black p-4 border border-white/5">
+              <img 
+                src={booomerangsLogo} 
+                alt="Boomerangs Logo" 
+                className="w-full h-auto brightness-110"
+              />
+            </div>
             <p className="font-mono text-lg md:text-xl text-zinc-300 mb-10 max-w-xl mx-auto">
               МЫ ДЕЛАЕМ ТО, ЧТО НОСИМ САМИ. <br/>
               ОРИГИНАЛЬНЫЙ РОССИЙСКИЙ СТРИТВИР.
