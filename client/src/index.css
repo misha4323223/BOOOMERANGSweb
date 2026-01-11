@@ -88,6 +88,19 @@
   }
 }
 
+@layer utilities {
+  .animate-marquee {
+    display: inline-block;
+    animation: marquee 30s linear infinite;
+    will-change: transform;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
