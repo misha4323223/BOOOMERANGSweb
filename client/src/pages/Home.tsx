@@ -7,6 +7,8 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import heroBg from "@assets/generated_images/wet_softshell_fabric_on_asphalt_rain.png";
 
+import identityVideo from "@assets/generated_videos/cinematic_dark_urban_streetwear_video.mp4";
+
 export default function Home() {
   const { data: products, isLoading } = useProducts();
   
@@ -80,13 +82,15 @@ export default function Home() {
                 ЧИТАТЬ МАНИФЕСТ <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-2 transition-transform" />
               </Link>
             </div>
-            <div className="relative">
+            <div className="relative aspect-square overflow-hidden bg-black">
               <div className="absolute -inset-4 border-2 border-primary/20 z-0" />
-              {/* Unsplash image: graffiti wall texture urban */}
-              <img 
-                src="https://images.unsplash.com/photo-1496360938681-9a918960fa03?q=80&w=1000&auto=format&fit=crop" 
-                alt="Brand Philosophy" 
-                className="relative z-10 w-full aspect-square object-cover grayscale hover:grayscale-0 transition-all duration-700"
+              <video 
+                src={identityVideo} 
+                autoPlay 
+                loop 
+                muted 
+                playsInline
+                className="relative z-10 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
               />
             </div>
           </div>
