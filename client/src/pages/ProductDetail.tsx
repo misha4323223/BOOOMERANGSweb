@@ -37,7 +37,6 @@ export default function ProductDetail() {
 
   const handleAddToCart = () => {
     if (!selectedSize || !selectedColor) {
-      // Typically show error toast here
       return;
     }
     addToCart.mutate({
@@ -59,28 +58,13 @@ export default function ProductDetail() {
       <Navbar />
       
       <div className="pt-20 pb-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-24">
           
-          {/* Left: Image Gallery */}
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="space-y-4"
-          >
-            <div className="aspect-[4/5] sm:aspect-[3/4] bg-zinc-900 w-full overflow-hidden max-h-[50vh] sm:max-h-none">
-              <img 
-                src={product.imageUrl} 
-                alt={product.name} 
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </motion.div>
-
-          {/* Right: Details */}
+          {/* Details - Top on mobile, right on desktop */}
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex flex-col justify-center pt-4 lg:pt-0"
+            className="flex flex-col justify-center pt-4 lg:pt-0 order-1 lg:order-2"
           >
             <div className="mb-1">
               <span className="font-mono text-primary text-[10px] sm:text-sm uppercase tracking-widest">{product.category}</span>
@@ -163,7 +147,7 @@ export default function ProductDetail() {
             <button
               onClick={handleAddToCart}
               disabled={!selectedSize || !selectedColor || addToCart.isPending}
-              className={`w-full h-14 flex items-center justify-center gap-3 font-display text-lg uppercase tracking-widest transition-all ${
+              className={`w-full h-14 flex items-center justify-center gap-3 font-display text-lg uppercase tracking-widest transition-all mb-4 ${
                 !selectedSize || !selectedColor
                   ? "bg-zinc-800 text-zinc-500 cursor-not-allowed"
                   : "bg-primary text-white hover:bg-red-600"
@@ -180,11 +164,25 @@ export default function ProductDetail() {
             </button>
             
             {(!selectedSize || !selectedColor) && (
-              <p className="mt-4 text-center text-red-500 font-mono text-xs uppercase">
+              <p className="mt-2 text-center text-red-500 font-mono text-[10px] uppercase tracking-tighter">
                 Пожалуйста, выберите размер и цвет
               </p>
             )}
-
+          </motion.div>
+          
+          {/* Image Gallery - Bottom on mobile, left on desktop */}
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="space-y-4 order-2 lg:order-1"
+          >
+            <div className="aspect-[4/5] sm:aspect-[3/4] bg-zinc-900 w-full overflow-hidden max-h-[50vh] sm:max-h-none">
+              <img 
+                src={product.imageUrl} 
+                alt={product.name} 
+                className="w-full h-full object-cover"
+              />
+            </div>
           </motion.div>
         </div>
       </div>
