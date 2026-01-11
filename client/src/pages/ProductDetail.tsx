@@ -80,6 +80,21 @@ export default function ProductDetail() {
               <p className="line-clamp-2 sm:line-clamp-none opacity-80">{product.description}</p>
             </div>
 
+            {/* Mobile Image Gallery - inserted between description and selectors */}
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="lg:hidden mb-6"
+            >
+              <div className="aspect-[4/5] bg-zinc-900/30 w-full overflow-hidden border border-white/5 rounded-none shadow-xl">
+                <img 
+                  src={product.imageUrl} 
+                  alt={product.name} 
+                  className="w-full h-full object-cover grayscale-[0.3] hover:grayscale-0 transition-all duration-700"
+                />
+              </div>
+            </motion.div>
+
             {/* Compact Selectors Grid */}
             <div className="grid grid-cols-1 gap-4 mb-6 sm:mb-10 p-3 sm:p-0 bg-zinc-900/50 sm:bg-transparent border border-white/5 sm:border-0 rounded-sm">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -170,13 +185,13 @@ export default function ProductDetail() {
             )}
           </motion.div>
           
-          {/* Image Gallery */}
+          {/* Image Gallery - Hidden on mobile, left on desktop */}
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="order-2 lg:order-1"
+            className="hidden lg:block order-2 lg:order-1"
           >
-            <div className="aspect-[4/5] sm:aspect-[3/4] bg-zinc-900/30 w-full overflow-hidden border border-white/5">
+            <div className="aspect-[3/4] bg-zinc-900/30 w-full overflow-hidden border border-white/5">
               <img 
                 src={product.imageUrl} 
                 alt={product.name} 
