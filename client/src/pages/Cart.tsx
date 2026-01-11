@@ -91,7 +91,7 @@ export default function Cart() {
 
             {/* Summary */}
             <div className="lg:col-span-1">
-              <div className="bg-zinc-950 border border-zinc-900 p-8 sticky top-32">
+              <div className="bg-zinc-950 border border-zinc-900 p-8 lg:sticky lg:top-32 relative z-10">
                 <h3 className="font-display text-2xl uppercase mb-8">Итого</h3>
                 
                 <div className="space-y-4 mb-8 font-mono text-sm">
