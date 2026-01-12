@@ -6,6 +6,8 @@ import { relations } from "drizzle-orm";
 // Products
 export const products = pgTable("products", {
   id: serial("id").primaryKey(),
+  externalId: text("external_id").unique(), // ID from 1C
+  sku: text("sku").unique(), // Article/SKU
   name: text("name").notNull(),
   description: text("description").notNull(),
   price: integer("price").notNull(), // stored in cents/kopeks

@@ -27,6 +27,47 @@ export async function registerRoutes(
     res.json(product);
   });
 
+  // 1C Sync API
+  app.post("/api/sync/products", async (req, res) => {
+    const apiKey = req.headers["x-api-key"];
+    const expectedKey = process.env.SYNC_API_KEY || "bmg-secret-key-123";
+
+    if (apiKey !== expectedKey) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    try {
+      const items = z.array(z.object({
+        externalId: z.string(),
+        sku: z.string().optional(),
+        name: z.string(),
+        description: z.string(),
+        price: z.number(),
+        imageUrl: z.string(),
+        category: z.string(),
+        sizes: z.array(z.string()),
+        colors: z.array(z.string()),
+        isNew: z.boolean().optional()
+      })).parse(req.body);
+
+      const results = [];
+      for (const item of items) {
+        const existing = await storage.getProductByExternalId(item.externalId);
+        if (existing) {
+          const updated = await storage.updateProduct(existing.id, item);
+          results.push({ id: updated.id, status: "updated" });
+        } else {
+          const created = await storage.createProduct(item as any);
+          results.push({ id: created.id, status: "created" });
+        }
+      }
+
+      res.json({ success: true, results });
+    } catch (err) {
+      res.status(400).json({ message: "Invalid data format" });
+    }
+  });
+
   app.post(api.products.create.path, async (req, res) => {
     try {
       const input = api.products.create.input.parse(req.body);
