@@ -110,11 +110,12 @@ export default function Cart() {
                 </div>
                 
                 <div className="relative z-[60]">
-                  <Link href="/checkout">
-                    <button className="w-full bg-white text-black hover:bg-primary hover:text-white h-14 font-display text-xl uppercase tracking-widest transition-all flex items-center justify-center gap-2 group pointer-events-auto">
-                      Оформить заказ <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </button>
-                  </Link>
+                  <button 
+                    onClick={() => setLocation("/checkout")}
+                    className="w-full bg-white text-black hover:bg-primary hover:text-white h-14 font-display text-xl uppercase tracking-widest transition-all flex items-center justify-center gap-2 group pointer-events-auto"
+                  >
+                    Оформить заказ <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </button>
                 </div>
                 
                 <Link href="/products" className="block text-center mt-6 font-mono text-xs text-zinc-500 hover:text-white relative z-[60]">
