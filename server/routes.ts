@@ -68,6 +68,35 @@ export async function registerRoutes(
     }
   });
 
+  app.get("/api/sync/orders", async (req, res) => {
+    const apiKey = req.headers["x-api-key"];
+    const expectedKey = process.env.SYNC_API_KEY || "bmg-secret-key-123";
+
+    if (apiKey !== expectedKey) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const orders = await storage.getOrdersByStatus("pending");
+    res.json(orders);
+  });
+
+  app.patch("/api/sync/orders/:id", async (req, res) => {
+    const apiKey = req.headers["x-api-key"];
+    const expectedKey = process.env.SYNC_API_KEY || "bmg-secret-key-123";
+
+    if (apiKey !== expectedKey) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    try {
+      const { status } = z.object({ status: z.string() }).parse(req.body);
+      const order = await storage.updateOrderStatus(Number(req.params.id), status);
+      res.json(order);
+    } catch (err) {
+      res.status(400).json({ message: "Invalid data" });
+    }
+  });
+
   app.post(api.products.create.path, async (req, res) => {
     try {
       const input = api.products.create.input.parse(req.body);

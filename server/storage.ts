@@ -17,6 +17,9 @@ export interface IStorage {
   clearCart(sessionId: string): Promise<void>;
 
   // Orders
+  getOrders(): Promise<Order[]>;
+  getOrdersByStatus(status: string): Promise<Order[]>;
+  updateOrderStatus(id: number, status: string): Promise<Order>;
   createOrder(order: InsertOrder & { items: any[], total: number }): Promise<Order>;
 }
 
@@ -74,6 +77,19 @@ export class DatabaseStorage implements IStorage {
   }
 
   // Orders
+  async getOrders(): Promise<Order[]> {
+    return await db.select().from(orders);
+  }
+
+  async getOrdersByStatus(status: string): Promise<Order[]> {
+    return await db.select().from(orders).where(eq(orders.status, status));
+  }
+
+  async updateOrderStatus(id: number, status: string): Promise<Order> {
+    const [order] = await db.update(orders).set({ status }).where(eq(orders.id, id)).returning();
+    return order;
+  }
+
   async createOrder(order: InsertOrder & { items: any[], total: number }): Promise<Order> {
     const [newOrder] = await db.insert(orders).values(order).returning();
     return newOrder;
