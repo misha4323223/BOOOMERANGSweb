@@ -10,7 +10,7 @@
     *   Поля помечены как уникальные для предотвращения дублирования товаров при синхронизации.
 
 3.  **Разработка Backend (Node.js)**:
-    *   **API Синхронизации**: Созданы маршруты `POST /api/sync/products` (прием товаров), `GET /api/sync/orders` (выгрузка заказов) и `PATCH /api/sync/orders/:id` (смена статусов).
+    *   **API Синхронизации**: Созданы маршруты `POST /api/sync/products` (прием товаров), `POST /api/sync/inventory` (быстрое обновление цен/остатков), `GET /api/sync/orders` (выгрузка заказов) и `PATCH /api/sync/orders/:id` (смена статусов).
     *   **Безопасность**: Реализована проверка заголовка `X-API-KEY` для всех сервисных маршрутов.
     *   **Методы хранилища**: Добавлены функции `getProductByExternalId`, `updateProduct`, `getOrdersByStatus` и `updateOrderStatus`.
 

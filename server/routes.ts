@@ -97,6 +97,39 @@ export async function registerRoutes(
     }
   });
 
+  // 1C Inventory Sync API (Update stock only)
+  app.post("/api/sync/inventory", async (req, res) => {
+    const apiKey = req.headers["x-api-key"];
+    const expectedKey = process.env.SYNC_API_KEY || "bmg-secret-key-123";
+
+    if (apiKey !== expectedKey) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    try {
+      const updates = z.array(z.object({
+        externalId: z.string(),
+        price: z.number().optional(),
+        sizes: z.array(z.string()).optional()
+      })).parse(req.body);
+
+      const results = [];
+      for (const update of updates) {
+        const existing = await storage.getProductByExternalId(update.externalId);
+        if (existing) {
+          const updated = await storage.updateProduct(existing.id, update);
+          results.push({ id: updated.id, status: "updated" });
+        } else {
+          results.push({ externalId: update.externalId, status: "not_found" });
+        }
+      }
+
+      res.json({ success: true, results });
+    } catch (err) {
+      res.status(400).json({ message: "Invalid data format" });
+    }
+  });
+
   app.post(api.products.create.path, async (req, res) => {
     try {
       const input = api.products.create.input.parse(req.body);
